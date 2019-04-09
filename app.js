@@ -67,5 +67,8 @@ app.use("/api", user);
 const pet = require("./routes/pet");
 app.use("/api", pet);
 
+const tips = require("./routes/tips");
+app.use("/api", tips);
+
 
 module.exports = app;

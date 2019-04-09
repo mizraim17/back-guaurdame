@@ -25,20 +25,23 @@ const userSchema = new Schema({
   state:String,
   city:String,
   community:String,
-  // timestamps: {
-  //   createdAt: 'created_at',
-  //     updatedAt: 'updated_at'
-  // },
+  cedula:String,
+  studies:String,
+  photoName:String,
+  photoPath:String,
+  
   role: {
     type: String,
     enum: ['vet', 'user'],
     default: 'user'
   },
-  // profile_pic: {
-  //   type: String,
-  //   default: 'https://res.cloudinary.com/dj3hdzs7e/image/upload/v1543784645/avatar.png'
-  // },
-})
+ 
+},{
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at"
+  }
+});
 
 const User = mongoose.model('User',userSchema)
 module.exports=User;

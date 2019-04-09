@@ -12,12 +12,21 @@ const petSchema = new Schema({
   breed:String,
   color:String,
   birth:Date,
+  vet:{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  },
   image:String,
   date_cut:Date,
   signs_part:String,
   tatto:String,
   chip:String
   
+},{
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at"
+  }
 });
 
 
