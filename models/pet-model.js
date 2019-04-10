@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-const User = require('../models/user-model')
+const User = require('../models/user-model');
+const File = require('../models/files-model')
 
 const petSchema = new Schema({
   weight:Number,
@@ -12,9 +13,15 @@ const petSchema = new Schema({
   breed:String,
   color:String,
   birth:Date,
+  imgName: String,
+  imgPath: String,
   vet:{
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  files:{
+    type: Schema.Types.ObjectId,
+    ref: "File"
   },
   image:String,
   date_cut:Date,

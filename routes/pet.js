@@ -3,20 +3,26 @@ const mongoose = require('mongoose');
 const Pet = require('../models/pet-model');
 const User = require('../models/user-model');
 const router = express.Router();
+const  parser = require('../config/cloudinary')
 
-router.post("/pet",(req,res,next)=>{
-      const { UserID,
+router.post("/pet",parser.single('picture'), (req,res,next)=>{
+      let imgPath=req.file.url
+  console.log('**************************************************')
+  console.log('imgPath---->',req.body)
+  console.log('imgPath---->',req.file)
+      const {
         weight,species,vet, sex,name,lastName,age,breed,
-        color,birth,image,date_cut,signs_part,tatto,chip
+        color,birth,image,date_cut,signs_part,tatto,chip,UserID
       } = req.body;
       
       const  pet = new Pet({
         weight,species,vet, sex,name,lastName,age,breed,
-        color,birth,image,date_cut,signs_part,tatto,chip
+        color,birth,image,date_cut,signs_part,tatto,chip,imgPath,UserID
       })
     pet.save()
       .then((response)=>{
         res.json(response)
+        console.log('================================')
         console.log('response._id',response._id)
         console.log('req.body.UserID',req.body.UserID)
         User.findByIdAndUpdate(req.body.UserID,{
@@ -33,6 +39,25 @@ router.post("/pet",(req,res,next)=>{
         console.log('errorPet',err)
       })
   })
+
+router.put("/pet/:id", (req,res,next)=>{
+  
+  console.log('++++++++++++++++++++++++++++++++')
+ 
+  console.log('body---->',req.body)
+  console.log('param---->',req.param.id)
+ 
+  Pet.findByIdAndUpdate(req.params.id,req.body)
+    .then((response)=>{
+      console.log('*****************************')
+      res.json(response)
+     
+   
+    })
+    .catch((err)=>{
+      console.log('errorPet',err)
+    })
+})
 
 router.get("/pet/:id",(req,res,next)=>{
   console.log('req.params.id',req.params.id)

@@ -52,10 +52,10 @@ router.post('/user/login', (req,res,next)=> {
         console.log('esta mal')
         res.status(500).json(response)
       }
-      
     })
     .catch((err)=>{
-      console.log(err)
+      console.log('no existe usuario---------')
+      res.status(500).json(err)
     })
 });
 
