@@ -11,13 +11,11 @@ router.post("/pet",parser.single('picture'), (req,res,next)=>{
   console.log('imgPath---->',req.body)
   console.log('imgPath---->',req.file)
       const {
-        weight,species,vet, sex,name,lastName,age,breed,
-        color,birth,image,date_cut,signs_part,tatto,chip,UserID
+        UserID
       } = req.body;
       
       const  pet = new Pet({
-        weight,species,vet, sex,name,lastName,age,breed,
-        color,birth,image,date_cut,signs_part,tatto,chip,imgPath,UserID
+       UserID,imgPath
       })
     pet.save()
       .then((response)=>{

@@ -29,7 +29,8 @@ const userSchema = new Schema({
   studies:String,
   photoName:String,
   photoPath:String,
-  
+  imgName: String,
+  imgPath: String,
   role: {
     type: String,
     enum: ['vet', 'user'],

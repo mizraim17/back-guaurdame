@@ -2,6 +2,7 @@ const express = require ('express');
 const mongoose = require("mongoose");
 const User = require("../models/user-model");
 const router = express.Router();
+const  parser = require('../config/cloudinary')
 
 router.post("/user", (req, res, next) => {
   const {
@@ -76,6 +77,27 @@ router.get('/user/:id', (req, res, next) => {
         res.json(err);
       });
   });
+
+router.put("/user/:id",parser.single('picture'), (req,res,next)=>{
+  let imgPath=req.file.url;
+  
+  console.log('++++++++++++++++++++++++++++++++')
+  console.log('body---->',req.body)
+  console.log('param---->',req.param)
+  console.log('imgPath---->', imgPath)
+ 
+  User.findByIdAndUpdate(req.params.id,{"imgPath":imgPath})
+    .then((response)=>{
+      console.log('*****************************')
+      res.json(response)
+      
+      
+    })
+    .catch((err)=>{
+      console.log('errorPet',err)
+    })
+})
+
 
 router.get('/user/vet/:id', (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
