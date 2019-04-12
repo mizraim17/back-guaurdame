@@ -7,11 +7,11 @@ const  parser = require('../config/cloudinary')
 router.post("/user", (req, res, next) => {
   const {
     name,apaterno,amaterno, password, email,cellphone,street,
-    no_street,zipcode,state,city,role,community, cedula,studies,photoName,photoPath} = req.body;
+    no_street,zipcode,state,city,role,community, cedula,studies,photoName,imgPath} = req.body;
 
   const user = new User({
     name,apaterno,amaterno, password, email,cellphone,street
-    ,no_street,zipcode,state,city,role,community,cedula,studies,photoName,photoPath
+    ,no_street,zipcode,state,city,role,community,cedula,studies,photoName,imgPath
   });
 
   user.save()
