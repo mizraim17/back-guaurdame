@@ -87,7 +87,7 @@ router.get("/pet/patients/:vet",(req,res,next)=>{
 })
 
 
-router.put("/pet/file/:id", (req,res,next)=>{
+router.post("/pet/file/:id", (req,res,next)=>{
   
   console.log('++++++++++++++++++++++++++++++++')
   
