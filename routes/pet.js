@@ -91,11 +91,11 @@ router.post("/pet/file/:id", (req,res,next)=>{
   
   console.log('++++++++++++++++++++++++++++++++')
   
-  console.log('body---->',req.body.file)
+  console.log('body---->',req.body.files)
   console.log('body---->',req.body)
   console.log('param---->',req.params.id)
   
-  Pet.findByIdAndUpdate(req.params.id,{"files":req.body.file})
+  Pet.findByIdAndUpdate(req.params.id,{"files":req.body.files})
     .then((response)=>{
       console.log('*****************************')
        res.json(response)
