@@ -71,5 +71,7 @@ app.use("/api", pet);
 const tips = require("./routes/tips");
 app.use("/api", tips);
 
+const file = require("./routes/files");
+app.use("/api", file);
 
 module.exports = app;

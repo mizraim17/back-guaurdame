@@ -98,6 +98,24 @@ router.put("/user/:id",parser.single('picture'), (req,res,next)=>{
     })
 })
 
+router.put("/editUser/:id", (req,res,next)=>{
+  
+  console.log('++++++++++++++++++++++++++++++++')
+  
+  console.log('body---->',req.body)
+  console.log('param---->',req.params.id)
+  
+  User.findByIdAndUpdate(req.params.id,req.body)
+    .then((response)=>{
+      console.log('*****************************')
+       res.json(response)
+      
+      
+    })
+    .catch((err)=>{
+      console.log('errorPet',err)
+    })
+})
 
 router.get('/user/vet/:id', (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

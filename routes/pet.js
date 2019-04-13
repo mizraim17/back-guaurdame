@@ -2,6 +2,8 @@ const express = require ('express');
 const mongoose = require('mongoose');
 const Pet = require('../models/pet-model');
 const User = require('../models/user-model');
+const File =require('../models/files-model')
+
 const router = express.Router();
 const  parser = require('../config/cloudinary')
 
@@ -83,5 +85,43 @@ router.get("/pet/patients/:vet",(req,res,next)=>{
       console.log('error de  pacientes',error)
     })
 })
+
+
+router.put("/pet/file/:id", (req,res,next)=>{
+  
+  console.log('++++++++++++++++++++++++++++++++')
+  
+  console.log('body---->',req.body.file)
+  console.log('body---->',req.body)
+  console.log('param---->',req.params.id)
+  
+  Pet.findByIdAndUpdate(req.params.id,{"files":req.body.file})
+    .then((response)=>{
+      console.log('*****************************')
+       res.json(response)
+       
+    })
+    .catch((err)=>{
+      console.log('errorPet',err)
+    })
+})
+
+router.get('/pet/history/:id', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: "El id no existe" });
+    return;
+  }
+  
+  Pet.findById(req.params.id)
+    .populate("files")
+    .then(response => {
+      console.log('populate de pet ')
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
 
 module.exports=router;
